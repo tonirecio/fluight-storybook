@@ -16,7 +16,7 @@ export default {
 
 export const Primary = {
   args:{
-    timeDefault: Date,
+    timeDefault: new Date(),
     dataTestId: "time-component",
     onTimeSelected: (selectedTime) => {
       console.log("Time Selected:", selectedTime);
