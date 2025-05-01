@@ -1,4 +1,4 @@
-import { PassengersFilter } from "fluight-core";
+import { PassengersFilter,  } from "fluight-core";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 export default {
@@ -17,5 +17,10 @@ export default {
   tags: ["autodocs"],
 };
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Primary = {};
+export const Primary = {
+  args:{
+    id: "selector-0",
+    number: 1,
+    type: "ADT"
+  }
+};
