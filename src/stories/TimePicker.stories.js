@@ -15,11 +15,11 @@ export default {
 };
 
 export const Primary = {
-  args:{
+  args: {
     timeDefault: new Date(),
     dataTestId: "time-component",
     onTimeSelected: (selectedTime) => {
       console.log("Time Selected:", selectedTime);
     },
-  }
+  },
 };
