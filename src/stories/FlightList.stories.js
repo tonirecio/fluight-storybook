@@ -1,7 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import { FlightList } from "fluight-core";
 export default {
-  title: "Example/FlightList",
+  title: "Results/FlightList",
   component: FlightList,
   tags: ["autodocs"],
 };

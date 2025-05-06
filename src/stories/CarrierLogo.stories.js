@@ -1,7 +1,7 @@
 import { CarrierLogo } from "fluight-core";
 
 export default {
-  title: "Example/CarrierLogo",
+  title: "Results/CarrierLogo",
   component: CarrierLogo,
   parameters: {
     layout: "centered",

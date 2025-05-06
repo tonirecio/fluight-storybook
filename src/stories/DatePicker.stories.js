@@ -1,7 +1,7 @@
 import { DatePicker } from "fluight-core";
 
 export default {
-  title: "Example/DatePicker",
+  title: "Form/DatePicker",
   component: DatePicker,
   parameters: {
     docs: {

@@ -1,7 +1,7 @@
 import { PassengersFilter,  } from "fluight-core";
 
 export default {
-  title: "Example/PassengersFilter",
+  title: "Form/PassengersFilter",
   component: PassengersFilter,
   parameters: {
     docs: {

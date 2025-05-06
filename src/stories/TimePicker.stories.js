@@ -1,7 +1,7 @@
 import { TimePicker } from "fluight-core";
 
 export default {
-  title: "Example/TimePicker",
+  title: "Form/TimePicker",
   component: TimePicker,
   parameters: {
     docs: {

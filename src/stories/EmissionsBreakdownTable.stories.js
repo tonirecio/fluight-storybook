@@ -1,7 +1,7 @@
 import { EmissionsBreakdownTable } from "fluight-core";
 
 export default {
-  title: "Example/EmissionsBreakdownTable",
+  title: "Details/EmissionsBreakdownTable",
   component: EmissionsBreakdownTable,
   parameters: {
     docs: {
