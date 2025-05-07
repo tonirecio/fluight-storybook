@@ -1,5 +1,5 @@
 import { LocationPicker } from "fluight-core";
-import locationData from "../../../fluight-core/src/components/data/LocationPicker.json";
+import locationData from "../../../../fluight-core/src/components/data/LocationPicker.json";
 
 export default {
   title: "Form/LocationPicker",

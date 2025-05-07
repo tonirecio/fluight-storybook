@@ -1,4 +1,4 @@
-import { PassengersFilter,  } from "fluight-core";
+import { PassengersFilter } from "fluight-core";
 
 export default {
   title: "Form/PassengersFilter",
@@ -15,9 +15,9 @@ export default {
 };
 
 export const Primary = {
-  args:{
+  args: {
     id: "selector-0",
     number: 1,
-    type: "ADT"
-  }
+    type: "ADT",
+  },
 };
