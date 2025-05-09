@@ -1,7 +1,7 @@
 import { TimePicker } from "fluight-core";
 
 export default {
-  title: "Form/TimePicker",
+  title: "Filters/TimePicker",
   component: TimePicker,
   parameters: {
     docs: {
@@ -19,7 +19,16 @@ export const Primary = {
     timeDefault: new Date(),
     dataTestId: "time-component",
     onTimeSelected: (selectedTime) => {
-      console.log("Time Selected:", selectedTime);
+      window.alert(
+        "Time Selected: " +
+          selectedTime
+            .toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            })
+            .replace(/:\d{2}$/, "")
+      );
     },
   },
 };
