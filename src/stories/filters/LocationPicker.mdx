@@ -1,0 +1,70 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as LocationPicker from './LocationPicker.stories';
+ 
+<Meta of={LocationPicker} />
+ 
+# LocationPicker
+
+The `LocationPicker` component is a React component designed for selecting a location from a list of options. It supports filtering locations based on user input, displaying previous searches, and handling location selection. This component is built with TypeScript and styled-components.
+
+---
+
+## Props
+
+### `LocationPickerProps`
+
+| Prop Name            | Type                             | Required | Default Value       | Description                                                                        |
+| -------------------- | -------------------------------- | -------- | ------------------- | ---------------------------------------------------------------------------------- |
+| `previousSearches`   | `location[]`                     | Yes      | N/A                 | An array of previously searched locations to display when no input is provided.    |
+| `selectedLocation`   | `location \| null`               | No       | `null`              | The currently selected location, if any.                                           |
+| `placeholderValue`   | `string`                         | Yes      | N/A                 | The placeholder text to display in the input field.                                |
+| `dataTestId`         | `string`                         | No       | `'location-picker'` | The `data-testid` attribute for the input field, useful for testing.               |
+| `onGetData`          | `(filter: string) => location[]` | No       | `undefined`         | An optional callback function to fetch filtered location data based on user input. |
+| `onLocationSelected` | `(location: location) => void`   | No       | `undefined`         | An optional callback function triggered when a location is selected.               |
+
+## TypeScript Types
+
+### `location`
+
+The `location` type represents a location object with the following structure:
+
+```typescript
+type location = {
+  code: string; // The airport code (e.g., "JFK").
+  city: string; // The city name (e.g., "New York").
+  country: string; // The country name (e.g., "USA").
+  airportName: string; // The name of the airport (e.g., "John F. Kennedy International").
+};
+```
+
+## Features
+
+1. **Dynamic Filtering**: Filters the list of locations based on user input.
+1. Previous Searches: Displays a list of previously searched locations when no input is provided.
+1. Customizable Data Fetching: Allows the use of a custom onGetData callback to fetch filtered location data.
+1. Selection Handling: Triggers the onLocationSelected callback when a location is selected.
+1. Keyboard and Mouse Interaction: Supports both keyboard and mouse interactions for selecting locations.
+
+## Component behavior
+
+1. Input Field:
+
+- Displays the placeholder text when no location is selected.
+- Updates dynamically as the user types.
+
+2. Dropdown:
+
+- Shows filtered results based on user input.
+- Displays previous searches when the input is empty.
+
+3. Icons:
+
+- Displays a HouseIcon for "All Airports".
+- Displays a PlaneIcon for specific airports.
+- Displays a LocationIcon when no location is selected.
+
+4. Callbacks:
+
+- onGetData: Fetches filtered location data.
+- onLocationSelected: Triggered when a location is selected.

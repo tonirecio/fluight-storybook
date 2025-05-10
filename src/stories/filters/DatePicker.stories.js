@@ -12,13 +12,21 @@ export default {
     },
     layout: "centered",
   },
-  tags: ["autodocs"],
 };
 
 export const Default = {
   args: {
     dateDefault: new Date(),
     dataTestId: "date-picker",
+    onDateSelected: (selectedDate) => {
+      window.alert("Selected date: " + selectedDate);
+    },
+  },
+};
+
+export const onDateSelected = {
+  args: {
+    ...Default.args,
     onDateSelected: (selectedDate) => {
       window.alert("Selected date: " + selectedDate);
     },

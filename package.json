@@ -12,7 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "fluight-core": "^0.1.21",
+    "fluight-core": "^0.1.23",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
@@ -41,6 +41,7 @@
     "globals": "^16.0.0",
     "playwright": "^1.52.0",
     "prop-types": "^15.8.1",
+    "remark-gfm": "^4.0.1",
     "storybook": "^8.6.12",
     "vite": "^6.3.1",
     "vitest": "^3.1.1"

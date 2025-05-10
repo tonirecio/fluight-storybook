@@ -1,0 +1,47 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as DatePicker from './DatePicker.stories';
+ 
+<Meta of={DatePicker} />
+ 
+# DatePicker
+
+The `DatePicker` component is a React component designed for selecting dates. It provides a simple and customizable interface for date selection, with support for default values, callbacks, and formatted date handling.
+
+---
+
+## Props
+
+### `DatePickerProps`
+
+| Prop Name        | Type                   | Required | Default Value   | Description                                                            |
+| ---------------- | ---------------------- | -------- | --------------- | ---------------------------------------------------------------------- |
+| `dateDefault`    | `Date`                 | No       | `new Date()`    | The default date to display in the date picker.                        |
+| `dataTestId`     | `string`               | No       | `'date-picker'` | The `data-testid` attribute for the date picker, useful for testing.   |
+| `onDateSelected` | `(date: Date) => void` | No       | `undefined`     | A callback function triggered when a new date is selected by the user. |
+
+## Features
+
+1. **Default Date**: Displays a default date when the component is rendered.
+1. **Date Formatting**: Automatically formats the selected date into a YYYY-MM-DD string.
+1. **Callback Support**: Triggers the onDateSelected callback when a new date is selected.
+1. **Controlled Input**: Uses React's useState to manage the selected date.
+
+## Component Behavior
+
+1. Input Field:
+
+- Displays the default date in YYYY-MM-DD format.
+- Updates dynamically as the user selects a new date.
+
+2. Date Formatting:
+
+- Uses the formatDate utility to ensure the date is always displayed in YYYY-MM-DD format.
+
+3. Date Conversion:
+
+- Converts the input string into a Date object using the stringToDate utility.
+
+4. Callback:
+
+- Triggers the onDateSelected callback whenever the user selects a new date.

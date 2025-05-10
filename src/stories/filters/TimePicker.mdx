@@ -1,0 +1,80 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as TimePicker from './TimePicker.stories';
+ 
+<Meta of={TimePicker} />
+ 
+# TimePicker
+
+The `TimePicker` component is a React component designed for selecting times. It provides a simple and customizable interface for time selection, with support for default values, callbacks, and formatted time handling. This component is built with TypeScript and styled-components.
+
+---
+
+## Props
+
+### `TimePickerProps`
+
+| Prop Name        | Type                   | Required | Default Value   | Description                                                            |
+| ---------------- | ---------------------- | -------- | --------------- | ---------------------------------------------------------------------- |
+| `timeDefault`    | `Date`                 | No       | `new Date()`    | The default time to display in the time picker.                        |
+| `dataTestId`     | `string`               | No       | `'time-picker'` | The `data-testid` attribute for the time picker, useful for testing.   |
+| `onTimeSelected` | `(time: Date) => void` | No       | `undefined`     | A callback function triggered when a new time is selected by the user. |
+
+## Features
+
+1. **Customizable Styling**: The `TimePicker` component uses `StyledTimeContainer`, a styled-component that adapts to the application's theme, including colors, paddings, and fonts.
+
+2. **Default Time**: Displays a default time when the component is rendered, which can be customized using the `timeDefault` prop.
+
+3. **Time Formatting**: Automatically formats the selected time into an `HH:mm` string for consistent display.
+
+4. **Callback Support**: Triggers the `onTimeSelected` callback when a new time is selected, allowing integration with other components or logic.
+
+5. **Responsive Design**: The input field is styled to be responsive, with a width of 100% and adaptable padding and font sizes.
+
+6. **Native HTML5 Support**: Leverages the `<input type="time">` element for native time selection, ensuring compatibility across modern browsers.
+
+7. **Theme Integration**: Fully integrates with the application's theme, using properties like `colors.controlsBorder`, `paddings.medium`, and `fonts.bodyText` from the `DefaultTheme`.
+
+8. **Keyboard and Mouse Interaction**: Supports both keyboard and mouse interactions for selecting and adjusting the time.
+
+## Component Behavior
+
+1. **Input Field**:
+
+   - The `StyledTimeContainer` is an `<input>` element styled using styled-components.
+   - It displays the default time in `HH:mm` format when the component is rendered.
+   - The input field updates dynamically as the user selects or types a new time.
+
+2. **Time Formatting**:
+
+   - The `formatTime` utility ensures that the time is always displayed in a consistent `HH:mm` format.
+   - When the user modifies the time, the input value is formatted and updated accordingly.
+
+3. **Time Conversion**:
+
+   - The `stringToTime` utility converts the `HH:mm` string entered by the user into a `Date` object.
+   - This ensures that the time is stored and processed in a standardized format.
+
+4. **Callback Execution**:
+
+   - When the user selects or modifies the time, the `onTimeSelected` callback is triggered (if provided).
+   - The callback receives the updated `Date` object representing the selected time.
+
+5. **Styling and Responsiveness**:
+
+   - The `StyledTimeContainer` adapts to the application's theme using properties from the `DefaultTheme`.
+   - It includes:
+     - A customizable border color (`colors.controlsBorder`).
+     - Padding (`paddings.medium`) for spacing inside the input field.
+     - Font styles (`fonts.bodyText`) and sizes (`fonts.sizes.bodyText.size`) for text consistency.
+   - The input field is fully responsive, with a width of 100% and a height of 35px.
+
+6. **Keyboard and Mouse Interaction**:
+
+   - Users can interact with the component using both keyboard and mouse.
+   - The `<input type="time">` element supports native browser functionality for time selection.
+
+7. **Error Handling**:
+   - If the user enters an invalid time format, the `stringToTime` utility ensures that the input is sanitized and converted into a valid `Date` object.
+   - The component gracefully handles missing or invalid theme properties by falling back to default values (e.g., `#CBCBCB` for borders, `10px` for padding, and `Arial` for fonts).

@@ -11,13 +11,18 @@ export default {
     },
     layout: "centered",
   },
-  tags: ["autodocs"],
 };
 
-export const Primary = {
+export const Default = {
   args: {
     timeDefault: new Date(),
     dataTestId: "time-component",
+  },
+};
+
+export const onTimeSelected = {
+  args: {
+    ...Default.args,
     onTimeSelected: (selectedTime) => {
       window.alert(
         "Time Selected: " +

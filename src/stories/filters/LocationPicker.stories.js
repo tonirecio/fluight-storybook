@@ -6,13 +6,13 @@ export default {
   parameters: {
     docs: {
       description: {
-        component:
-          "This component allows you to select a location and filters results while typing.",
+        component: `
+        A React component for selecting a location from a list of options. 
+        `,
       },
     },
     layout: "centered",
   },
-  tags: ["autodocs"],
 };
 
 export const Origin = {
