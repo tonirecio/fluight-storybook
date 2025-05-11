@@ -6,10 +6,9 @@ export default {
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
 };
 
-export const Primary = {
+export const Default = {
   args: {
     carrierCode: "IB",
     carrierShortName: "Iberia",

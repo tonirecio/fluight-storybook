@@ -1,0 +1,72 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as CarrierLogo from './CarrierLogo.stories';
+ 
+<Meta of={CarrierLogo} />
+ 
+# CarrierLogo
+
+The `CarrierLogo` component is designed to display the logo of an airline carrier. It fetches the logo from a predefined URL based on the carrier's code and provides options to display the carrier's short name as a title.
+
+---
+
+## Props
+
+### `CarrierLogoProps`
+
+| Prop Name          | Type                  | Required | Default Value    | Description                                                                         |
+| ------------------ | --------------------- | -------- | ---------------- | ----------------------------------------------------------------------------------- |
+| `carrierCode`      | `string \| undefined` | Yes      | N/A              | The unique code of the airline carrier (e.g., "AA" for American Airlines).          |
+| `carrierShortName` | `string`              | No       | `''`             | The short name of the airline carrier (e.g., "American Airlines").                  |
+| `showTitle`        | `boolean`             | No       | `false`          | Determines whether the carrier's short name is displayed as a title below the logo. |
+| `width`            | `number`              | No       | `200`            | The width of the logo image in pixels.                                              |
+| `testId`           | `string`              | No       | `'airline-logo'` | The `data-testid` attribute for the component, useful for testing.                  |
+
+## Features
+
+1. **Dynamic Logo Rendering**:
+
+   - Fetches and displays the airline carrier's logo from a predefined URL based on the `carrierCode`.
+   - Supports dynamic resizing of the logo using the `width` prop.
+
+2. **Fallback for Missing Data**:
+
+   - Displays a fallback message ("Image not available") if the `carrierCode` or `carrierShortName` is missing or undefined.
+
+3. **Optional Title Display**:
+
+   - Allows the carrier's short name to be displayed as a title below the logo when the `showTitle` prop is set to `true`.
+
+4. **Testing Support**:
+
+   - Includes `data-testid` attributes for easier testing with tools like `@testing-library/react`.
+   - Provides unique test IDs for the logo, fallback message, and title.
+
+5. **Lightweight and Reusable**:
+   - Designed to be a lightweight and reusable component for displaying airline logos in various contexts.
+
+## Component Behavior
+
+1. **Rendering the Logo**:
+
+   - If `carrierCode` and `carrierShortName` are valid, the component fetches the logo from the URL:
+     ```
+     https://assets.duffel.com/img/airlines/for-light-background/full-color-logo/{carrierCode}.svg
+     ```
+   - The logo is displayed as an `<img>` element with the specified `width`.
+
+2. **Fallback for Missing Data**:
+
+   - If `carrierCode` is `undefined` or `carrierShortName` is empty, the component renders a fallback message using `StyledNoImage` with the text "Image not available."
+
+3. **Title Display**:
+
+   - If `showTitle` is `true`, the carrier's short name is displayed as a `<h4>` element below the logo.
+   - The title is styled using `StyledCarrierLogo`.
+
+4. **Testing**:
+
+   - The `data-testid` attribute is applied to key elements for testing.
+
+5. **Error Handling**:
+   - Gracefully handles missing or invalid data by displaying a fallback message when `carrierCode` or `carrierShortName` is not provided.
