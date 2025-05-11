@@ -1,0 +1,132 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as JourneyBreakdown from './JourneyBreakdown.stories';
+ 
+<Meta of={JourneyBreakdown} />
+ 
+# JourneyBreakdown
+
+The `JourneyBreakdown` component is designed to display a detailed breakdown of a journey, including flight segments, layovers, and fare information.
+
+---
+
+## Props
+
+### `JourneyBreakdownProps`
+
+| Prop Name      | Type      | Required | Default Value         | Description                                                      |
+| -------------- | --------- | -------- | --------------------- | ---------------------------------------------------------------- |
+| `journey`      | `journey` | Yes      | N/A                   | The journey object containing flight and layover details.        |
+| `selectedFare` | `fare`    | Yes      | N/A                   | The selected fare for the journey, including fare name and code. |
+| `testId`       | `string`  | No       | `'journey-breakdown'` | The `data-testid` attribute for testing purposes.                |
+
+## TypeScript Types
+
+### `journey`
+
+The `journey` type represents a journey object with the following structure:
+
+```typescript
+type journey = {
+  carrier: carrier; // Airline information
+  layovers: string[]; // Array of layover locations
+  flights: populatedFlightDetail[]; // Array of flight details
+};
+```
+
+### `fare`
+
+The fare type represents the cost and environmental impact of a flihgt fare
+
+```typescript
+export default interface fare {
+  name: string; // Name of the fare
+  price: number; // Price of the fare
+  basis: string; // Fare basis code
+  currentEmissions: number; // Current CO₂ emissions for the fare
+  typicalEmissions: number; //  Typical CO₂ emissions for the fare
+  properties: fareProperties; // Additional properties of the fare
+}
+```
+
+### `fareProperties`
+
+The `fareProperties` type represents additional properties of a fare with the following structure:
+
+```typescript
+export default interface fareProperties {
+  fareType: string; // Type of fare (e.g., "Economy", "Business")
+  contentSource: string; // Source of fare content (e.g., "GDS", "API")
+  carryOnBag: string; // Carry-on baggage allowance
+  checkedBag: string; // Checked baggage allowance
+  refundable: string; // Refundable status
+  changeable: string; // Changeable status
+  mileageAccrual: string; // Mileage accrual information
+  usbPower: string; // USB power availability
+  priorityCheckIn: string; // Priority check-in status
+  priorityBoarding: string; // Priority boarding status
+  priorityBaggage: string; // Priority baggage handling status
+  fastTrack: string; // Fast track security status
+  loungeAccess: string; // Lounge access status
+  upgrade: string | null; // Upgrade availability
+  transferService: string | null; // Transfer service availability
+  personalItem: string | null; // Personal item allowance
+  earlySeatSelection: string; // Early seat selection availability
+  extraLegroom: string; // Extra legroom availability
+  premiumSeat: string | null; // Premium seat availability
+  lieFlatSeat: string | null; // Lie-flat seat availability
+  mealBeverages: string | null; // Meal and beverage options
+  wifiAccess: string | null; // Wi-Fi access availability
+  inFlightEntertainment: string; // In-flight entertainment options
+}
+```
+
+## Features
+
+1. **Journey Breakdown Rendering**:
+   - Dynamically renders a list of flight segments using the `JourneyBreakdownItem` component.
+   - Displays detailed information for each flight, including origin, destination, departure and arrival times, terminals, and aircraft.
+
+2. **Layover Detection**:
+   - Identifies layovers based on the `journey.layovers` array.
+   - Passes layover information (e.g., airport code and country) to the `JourneyBreakdownItem` component.
+
+3. **Fare Information**:
+   - Displays the selected fare name and fare code for the journey.
+   - Handles cases where no fare is selected by providing default values (`''`).
+
+4. **No Flights Handling**:
+   - Displays a fallback message ("Journey data is not available") if the journey contains no flights.
+
+5. **Testing Support**:
+   - Includes `data-testid` attributes for easier testing with tools like `@testing-library/react`.
+   - Provides unique test IDs for the journey breakdown container and fallback message.
+
+---
+
+## Component Behavior
+
+1. **Rendering Flight Segments**:
+   - The component maps over the `journey.flights` array to render a `JourneyBreakdownItem` for each flight segment.
+   - Passes detailed flight information, such as origin, destination, departure and arrival times, terminals, and aircraft, to the `JourneyBreakdownItem`.
+
+2. **Layover Detection**:
+   - The `getLayover` function checks if an airport code is included in the `journey.layovers` array.
+   - Returns the layover airport code if it exists, or `undefined` otherwise.
+
+3. **Previous Flight Arrival Time**:
+   - The `getPreviousFlightArrivalTime` function retrieves the arrival time of the previous flight segment.
+   - Returns `undefined` for the first flight segment.
+
+4. **Fare Information**:
+   - Extracts the fare name and fare code from the `selectedFare` prop.
+   - Provides default values (`''`) if no fare is selected.
+
+5. **No Flights Handling**:
+   - If the `journey.flights` array is empty, the component displays a fallback message: "Journey data is not available."
+
+6. **Testing**:
+   - The `data-testid` attribute is applied to key elements for testing purposes:
+     - Journey breakdown container: `data-testid={testId}`
+     - Fallback message: `data-testid='journey-breakdown-alt-text'`
+

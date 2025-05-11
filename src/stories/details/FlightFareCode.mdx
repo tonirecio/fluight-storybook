@@ -1,0 +1,58 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as FlightFareCode from './FlightFareCode.stories';
+ 
+<Meta of={FlightFareCode} />
+ 
+# FlightFareCode
+
+The `FlightFareCode` component is designed to display fare name and fare code information for a flight. It validates the provided data and ensures that only valid fare codes are displayed. If the data is invalid or unavailable, it displays an alternative message.
+
+---
+
+## Props
+
+### `FlightFareCodeProps`
+
+| Prop Name                   | Type                          | Required | Default Value | Description                                                         |
+| --------------------------- | ----------------------------- | -------- | ------------- | ------------------------------------------------------------------- |
+| `journeyBreakdownItemIndex` | `number`                      | No       | `-1`          | The index of the journey breakdown item, used for testing purposes. |
+| `fareName`                  | `string \| null \| undefined` | Yes      | N/A           | The name of the fare (e.g., "Economy").                             |
+| `fareCode`                  | `string \| null \| undefined` | Yes      | N/A           | The code of the fare (e.g., "Y·123").                               |
+
+## Features
+
+1. **Fare Name and Code Display**:
+
+   - Displays the fare name and fare code in a styled container.
+   - Formats the fare code with parentheses (e.g., `(Y·123)`).
+
+2. **Validation of Fare Data**:
+
+   - Validates the `fareName` and `fareCode` using a regular expression (`/^[A-Za-z]·[A-Z0-9]+$/`).
+   - Ensures that only valid fare codes are displayed.
+
+3. **Fallback for Invalid Data**:
+
+   - Displays a fallback message ("Fare code not available") if the fare data is invalid or unavailable.
+
+4. **Testing Support**:
+   - Includes `data-testid` attributes for easier testing with tools like `@testing-library/react`.
+   - Provides unique test IDs for fare name, fare code, and fallback messages.
+
+---
+
+## Component Behavior
+
+1. **Validation of Fare Data**:
+
+   - The `validData` function checks whether the `fareName` and `fareCode` are valid:
+     - Ensures that `fareName` and `fareCode` are not `null`, `undefined`, or the string `"undefined"`.
+     - Uses a regular expression to validate the format of the `fareCode`.
+
+2. **Rendering Fare Information**:
+   - If the fare data is valid:
+     - Displays the `fareName` and `fareCode` in a styled container.
+     - The `fareCode` is trimmed and wrapped in parentheses.
+   - If the fare data is invalid:
+     - Displays a fallback message: "Fare code not available."

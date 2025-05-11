@@ -1,0 +1,101 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as JourneyAirportDetail from './JourneyAirportDetail.stories';
+ 
+<Meta of={JourneyAirportDetail} />
+ 
+# JourneyAirportDetail
+
+The `JourneyAirportDetail` component is designed to display detailed information about a flight's departure or arrival. It includes details such as the city, airport, terminal, date, and flight time.
+
+---
+
+## Props
+
+### `JourneyAirportDetailProps`
+
+| Prop Name                   | Type      | Required | Default Value | Description                                                                |
+| --------------------------- | --------- | -------- | ------------- | -------------------------------------------------------------------------- |
+| `props`                     | `any`     | No       | `undefined`   | Additional props for debugging or customization.                           |
+| `journeyBreakdownItemIndex` | `number`  | No       | `-1`          | The index of the journey breakdown item, used for testing purposes.        |
+| `date`                      | `Date`    | Yes      | N/A           | The date of the flight.                                                    |
+| `departureDone`             | `boolean` | Yes      | N/A           | Indicates whether the flight is a departure (`false`) or arrival (`true`). |
+| `differenceArrival`         | `string`  | Yes      | N/A           | The day difference indicator (e.g., "+1" for next-day arrival).            |
+| `cityName`                  | `string`  | Yes      | N/A           | The name of the city for the flight.                                       |
+| `airportName`               | `string`  | Yes      | N/A           | The name of the airport.                                                   |
+| `airportCode`               | `string`  | Yes      | N/A           | The IATA code of the airport.                                              |
+| `terminal`                  | `string`  | Yes      | N/A           | The terminal at the airport.                                               |
+| `flyingTime`                | `string`  | Yes      | N/A           | The total flight time.                                                     |
+
+## Features
+
+1. **Date and Time Formatting**:
+
+   - Formats the flight date into a readable format (e.g., "Mon, 12 Dec").
+   - Adjusts the format based on the `differenceArrival` and `departureDone` props.
+   - Dynamically selects the font color for the date based on the `differenceArrival` value (e.g., grey, orange, or red).
+
+2. **City and Hour Information**:
+
+   - Displays a message indicating the departure or arrival city and time.
+   - Handles cases where city or time information is unavailable with fallback messages.
+
+3. **Airport Information**:
+
+   - Displays the airport name and code in a formatted string (e.g., "John F. Kennedy International (JFK)").
+   - Provides fallback messages if the airport name or code is missing.
+
+4. **Terminal Information**:
+
+   - Displays the terminal information for the flight (e.g., "Terminal 4").
+   - Provides a fallback message if terminal information is unavailable.
+
+5. **Flight Time Display**:
+
+   - Displays the total flight time if available (e.g., "2h 30m flight").
+   - Provides a fallback message if flight time is not available.
+
+6. **Testing Support**:
+   - Includes `data-testid` attributes for easier testing with tools like `@testing-library/react`.
+   - Provides unique test IDs for date, city, airport, terminal, and flight time information.
+
+## Component Behavior
+
+1. **Date Formatting**:
+
+   - The `getFormatedDate` function formats the flight date into a readable format:
+     - Includes the day of the week, day, and month.
+     - Adjusts the format based on the `differenceArrival` and `departureDone` props.
+     - Returns `null` if the date is invalid.
+
+2. **City and Hour Information**:
+
+   - The `cityAndHourInfo` function generates a message indicating the departure or arrival city and time:
+     - Example: "Depart from New York at 14:30" or "Arrive in London at 08:15."
+     - Handles cases where city or time information is missing with fallback messages.
+
+3. **Airport Information**:
+
+   - The `airportInfo` function generates a formatted string for the airport name and code:
+     - Example: "John F. Kennedy International (JFK)."
+     - Provides fallback messages if the airport name or code is unavailable.
+
+4. **Terminal Information**:
+
+   - The `terminalInfo` function generates a message for the terminal:
+     - Example: "Terminal 4."
+     - Provides a fallback message if terminal information is unavailable.
+
+5. **Flight Time Display**:
+
+   - The `getFlightTimeContent` function displays the total flight time:
+     - Example: "2h 30m flight."
+     - Provides a fallback message if flight time is not available.
+
+6. **Testing**:
+   - The `data-testid` attribute is applied to key elements for testing purposes:
+     - Date and time: `data-testid="journey-airport-detail-day-difference"`
+     - City and hour: `data-testid="journey-first-line"`
+     - Airport: `data-testid="journey-second-line"`
+     - Terminal: `data-testid="journey-third-line"`
+     - Flight time: `data-testid="journey-fourth-line"`
