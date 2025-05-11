@@ -1,0 +1,97 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as SegmentsTabs from './SegmentsTabs.stories';
+ 
+<Meta of={SegmentsTabs} />
+ 
+# SegmentsTabs
+
+The `SegmentsTabs` component is designed to display a series of tabs representing flight segments. It allows users to navigate between different flight segments, highlighting the selected tab and enabling or disabling tabs based on their position relative to the selected one.
+
+---
+
+## Props
+
+### `SegmentsTabsProps`
+
+| Prop Name       | Type                      | Required | Default Value | Description                                                                               |
+| --------------- | ------------------------- | -------- | ------------- | ----------------------------------------------------------------------------------------- |
+| `tabs`          | `segmentTab[]`            | Yes      | N/A           | An array of flight segment data, each containing departure, arrival, and day information. |
+| `selectedTab`   | `number`                  | Yes      | N/A           | The index of the currently selected tab.                                                  |
+| `onTabSelected` | `(index: number) => void` | Yes      | N/A           | A callback function triggered when a tab is selected.                                     |
+
+## TypeScript Types
+
+### `segmentTab`
+
+The segmentTab type represents the structure of a flight segment tab:
+
+```typescript
+type location = {
+interface segmentTab {
+  departure: string; // Departure location description
+  arrival: string; // Arrival location description
+  day: string; // Day of the flight segment
+};
+```
+
+## Features
+
+1. **Dynamic Tab Rendering**:
+
+   - Renders a tab for each flight segment in the `tabs` array.
+   - Displays the departure, arrival, and day information for each segment.
+
+2. **Selected Tab Highlighting**:
+
+   - Highlights the currently selected tab using the `StyledSelectedTab` styled-component.
+   - Ensures the selected tab is visually distinct and not clickable.
+
+3. **Enabled and Disabled Tabs**:
+
+   - Tabs before the selected tab are enabled and clickable, allowing users to navigate back.
+   - Tabs after the selected tab are disabled and styled using `StyledDisabledTab`.
+
+4. **Callback Support**:
+
+   - Triggers the `onTabSelected` callback when an enabled tab is clicked, passing the index of the selected tab.
+
+5. **Flight Information Display**:
+
+   - Displays the total number of tabs and the currently selected tab index in the header.
+   - Includes a message indicating that prices include taxes.
+
+6. **Testing Support**:
+   - Includes `data-testid` attributes for easier testing with tools like `@testing-library/react`.
+   - Provides unique test IDs for each tab, departure, arrival, and day information.
+
+## Component Behavior
+
+1. **Rendering Tabs**:
+
+   - The component maps over the `tabs` array to render a tab for each flight segment.
+   - Each tab displays the departure, arrival, and day information using `StyledBoldText` and `StyledNormalText`.
+
+2. **Selected Tab**:
+
+   - The tab corresponding to the `selectedTab` index is highlighted using `StyledSelectedTab`.
+   - The selected tab is not clickable and visually distinct from other tabs.
+
+3. **Enabled Tabs**:
+
+   - Tabs before the `selectedTab` index are rendered using `StyledEnabledTab`.
+   - Clicking on an enabled tab triggers the `onTabSelected` callback with the index of the clicked tab.
+
+4. **Disabled Tabs**:
+
+   - Tabs after the `selectedTab` index are rendered using `StyledDisabledTab`.
+   - Disabled tabs are styled to indicate they are not clickable.
+
+5. **Header Information**:
+
+   - The header displays the current flight segment index (`selectedTab + 1`) and the total number of segments (`tabs.length`).
+   - Includes a message indicating that prices include taxes.
+
+6. **Keyboard and Mouse Interaction**:
+   - Users can interact with the component using a mouse to click on enabled tabs.
+   - The selected tab and disabled tabs are not interactive.

@@ -1,21 +1,14 @@
 import { SegmentsTabs } from "fluight-core";
 
 export default {
-  title: "Form/SegmentsTabs",
+  title: "Results/SegmentsTabs",
   component: SegmentsTabs,
   parameters: {
     layout: "centered",
-    docs: {
-      description: {
-        component:
-          "This component allows you to select an airline from the deployable and choose if it is 'preferred', 'exclude', 'only' or 'all' at the moment of the search",
-      },
-    },
   },
-  tags: ["autodocs"],
 };
 
-export const Primary = {
+export const Default = {
   args: {
     tabs: [
       { departure: "BCN", arrival: "MAD", day: "05 Nov" },
