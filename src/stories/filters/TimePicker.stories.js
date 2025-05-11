@@ -4,11 +4,6 @@ export default {
   title: "Filters/TimePicker",
   component: TimePicker,
   parameters: {
-    docs: {
-      description: {
-        component: "This component allows you to pick any time you want",
-      },
-    },
     layout: "centered",
   },
 };

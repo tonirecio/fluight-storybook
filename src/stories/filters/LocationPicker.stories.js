@@ -4,13 +4,6 @@ export default {
   title: "Filters/LocationPicker",
   component: LocationPicker,
   parameters: {
-    docs: {
-      description: {
-        component: `
-        A React component for selecting a location from a list of options. 
-        `,
-      },
-    },
     layout: "centered",
   },
 };
@@ -77,7 +70,7 @@ export const SelectedLocation = {
   },
 };
 
-export const GetData = {
+export const OnGetData = {
   args: {
     ...Origin.args,
     onGetData: () => {

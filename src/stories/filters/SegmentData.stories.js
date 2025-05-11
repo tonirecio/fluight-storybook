@@ -5,12 +5,6 @@ export default {
   title: "Filters/SegmentData",
   component: SegmentData,
   parameters: {
-    docs: {
-      description: {
-        component:
-          "This component shows you an example default value and the basic behaviour of the 4 components together.",
-      },
-    },
     layout: "centered",
   },
 };

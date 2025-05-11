@@ -4,11 +4,6 @@ export default {
   title: "Filters/SegmentFilter",
   component: SegmentFilter,
   parameters: {
-    docs: {
-      description: {
-        component: `This component shows you de default behaviour of the component with the delete x button. Can't use it because allways there must be one segment.`,
-      },
-    },
   },
   layout: "centered",
 };

@@ -1,0 +1,56 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as PreferredItem from './PreferredItem.stories';
+ 
+<Meta of={PreferredItem} />
+ 
+# PreferredItem
+
+The `PreferredItem` component is designed to display a selected item with an option to delete it. It is commonly used in scenarios where users can select multiple items and remove them individually.
+
+---
+
+## Props
+
+### `PreferredItemProps`
+
+| Prop Name       | Type                     | Required | Default Value | Description                                                        |
+| --------------- | ------------------------ | -------- | ------------- | ------------------------------------------------------------------ |
+| `itemCode`      | `string`                 | Yes      | N/A           | The unique code of the item to be displayed.                       |
+| `onItemDeleted` | `(item: string) => void` | No       | `undefined`   | A callback function triggered when the item is deleted.            |
+| `dataTestId`    | `string`                 | No       | `''`          | The `data-testid` attribute for the component, useful for testing. |
+| `className`     | `string`                 | No       | `''`          | An optional class name for custom styling.                         |
+
+## Features
+
+1. **Item Display**:
+
+   - Displays an item with a unique code (`itemCode`).
+   - The `itemCode` is rendered inside a styled container (`StyledSelectedCarrier`).
+
+2. **Item Deletion**:
+
+   - Includes a delete button styled with `StyledRemoveButton`.
+   - Triggers the `onItemDeleted` callback when the delete button is clicked, passing the `itemCode` as a parameter.
+   - The delete button is accompanied by a `CloseIcon` for visual clarity.
+
+3. **Testing Support**:
+
+   - Includes a `data-testid` attribute for easier testing with tools like `@testing-library/react`.
+   - The delete button has a unique `data-testid` attribute in the format `removeButton-{itemCode}` for precise testing.
+
+4. **Lightweight and Reusable**:
+   - Designed to be a lightweight and reusable component for managing selected items in lists or dropdowns.
+
+---
+
+## Component Behavior
+
+1. **Click Interaction**:
+
+   - When the delete button is clicked, the `onItemDeleted` callback is triggered (if provided).
+   - The `itemCode` is passed as a parameter to the callback, allowing the parent component to handle the deletion logic.
+
+2. **Testing**:
+   - The `dataTestId` prop allows developers to assign a unique test ID to the component for testing purposes.
+   - The delete button includes a `data-testid` attribute in the format `removeButton-{itemCode}` for precise testing.

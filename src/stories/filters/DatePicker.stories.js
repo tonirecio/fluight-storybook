@@ -4,12 +4,6 @@ export default {
   title: "Filters/DatePicker",
   component: DatePicker,
   parameters: {
-    docs: {
-      description: {
-        component:
-          "This component allows you to select a date using a native date input.",
-      },
-    },
     layout: "centered",
   },
 };

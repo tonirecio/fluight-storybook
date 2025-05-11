@@ -5,11 +5,6 @@ export default {
   title: "Filters/SegmentsFilter",
   component: SegmentsFilter,
   parameters: {
-    docs: {
-      description: {
-        component: `The SegmentsFilter component is designed to manage and display a list of flight segments. It allows users to dynamically add, update, and delete flight segments using the SegmentFilter component.`,
-      },
-    },
   },
   layout: "centered",
 };

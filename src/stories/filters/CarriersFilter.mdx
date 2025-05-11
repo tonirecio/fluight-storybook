@@ -1,0 +1,102 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as CarriersFilter from './CarriersFilter.stories';
+ 
+<Meta of={CarriersFilter} />
+ 
+# CarriersFilter
+
+The `CarriersFilter` component is designed to manage and display a list of selected carriers (airlines). It allows users to search for carriers, select up to 5 carriers, and apply filters such as "Preferred," "Exclude," "Only," or "All." 
+
+---
+
+## Props
+
+### `CarriersFilterProps`
+
+| Prop Name                        | Type                                   | Required | Default Value               | Description                                                                                     |
+|----------------------------------|----------------------------------------|----------|-----------------------------|-------------------------------------------------------------------------------------------------|
+| `dataTestId`                     | `string`                              | No       | `'carriers-filter-picker'`  | The `data-testid` attribute for the main container, useful for testing.                        |
+| `onGetData`                      | `(filter: string) => carrier[]`       | No       | `undefined`                 | A callback function to fetch filtered carrier data based on user input.                        |
+| `onCarriersFilterSelected`       | `(carriers: string[]) => void`        | No       | `undefined`                 | A callback function triggered whenever the list of selected carriers is updated.               |
+| `onCarriersFilterModifierSelected` | `(carriersModifier: string) => void` | No       | `undefined`                 | A callback function triggered whenever the carrier filter type is changed.                     |
+
+
+## TypeScript Types
+
+### `carrier
+
+The `carrier` type represents a airline information object with the following structure:
+
+```typescript
+export default interface carrier {
+    code: string;
+    name: string;
+}
+```
+
+## Features
+
+1. **Carrier Selection**:
+   - Allows users to select up to 5 carriers from a dropdown list.
+   - Displays selected carriers in a styled container using the `PreferredItem` component.
+   - Prevents duplicate carrier selection.
+
+2. **Search Functionality**:
+   - Includes a search input field to filter carriers by code or name.
+   - Supports dynamic filtering using the `onGetData` callback or local data (`carriersData`).
+
+3. **Dropdown for Carrier Options**:
+   - Displays a dropdown with filtered carrier options based on the search input.
+   - Automatically hides the dropdown when a carrier is selected or when the input loses focus.
+
+4. **Carrier Filter Types**:
+   - Provides a dropdown to select carrier filter types: "Preferred," "Exclude," "Only," or "All."
+   - Triggers the `onCarriersFilterModifierSelected` callback when the filter type is changed.
+
+5. **Remove Selected Carriers**:
+   - Includes a delete button for each selected carrier, allowing users to remove individual carriers.
+   - Provides a "Clear All" button to remove all selected carriers at once.
+
+6. **Validation Rules**:
+   - Enforces a maximum of 5 selected carriers.
+   - Ensures that the dropdown options dynamically update based on the search input.
+
+7. **Testing Support**:
+   - Includes `data-testid` attributes for easier testing with tools like `@testing-library/react`.
+
+---
+
+## Component Behavior
+
+1. **Rendering**:
+   - The component renders a styled container (`StyledCarriersFilter`) with sections for selected carriers, a search input, and carrier filter types.
+
+2. **Carrier Selection**:
+   - Users can select carriers from the dropdown by clicking on an option.
+   - Selected carriers are displayed in the `StyledSelectedCarrierContainer` using the `PreferredItem` component.
+   - The `onCarriersFilterSelected` callback is triggered whenever the list of selected carriers is updated.
+
+3. **Search Functionality**:
+   - The search input field filters carriers based on the user's input.
+   - If the `onGetData` callback is provided, it is used to fetch filtered carrier data. Otherwise, local data (`carriersData`) is used.
+
+4. **Dropdown Visibility**:
+   - The dropdown is displayed when the search input is focused or when the user types in the search field.
+   - The dropdown is hidden when a carrier is selected or when the input loses focus.
+
+5. **Carrier Filter Types**:
+   - Users can select a carrier filter type from the dropdown ("Preferred," "Exclude," "Only," or "All").
+   - The `onCarriersFilterModifierSelected` callback is triggered whenever the filter type is changed.
+
+6. **Removing Carriers**:
+   - Users can remove individual carriers by clicking the delete button next to each carrier.
+   - The "Clear All" button removes all selected carriers.
+
+7. **Keyboard and Mouse Interaction**:
+   - Users can interact with the component using both keyboard and mouse.
+   - The search input supports typing and navigation through the dropdown options.
+
+8. **Callback Execution**:
+   - The `onCarriersFilterSelected` callback is triggered whenever the selected carriers are updated.
+   - The `onCarriersFilterModifierSelected` callback is triggered whenever the carrier filter type is changed.

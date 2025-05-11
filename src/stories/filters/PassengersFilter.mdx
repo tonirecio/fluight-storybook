@@ -1,0 +1,104 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as PassengersFilter from './PassengersFilter.stories';
+ 
+<Meta of={PassengersFilter} />
+ 
+# PassengersFilter
+
+The `PassengersFilter` component is designed to manage and display passenger selection for a flight. It allows users to dynamically add, update, and remove passenger types and counts, while enforcing specific rules for valid passenger configurations.
+
+---
+
+## Props
+
+### `PassengersFilterProps`
+
+| Prop Name              | Type                                    | Required | Default Value         | Description                                                             |
+| ---------------------- | --------------------------------------- | -------- | --------------------- | ----------------------------------------------------------------------- |
+| `dataTestId`           | `string`                                | No       | `'passengers-filter'` | The `data-testid` attribute for the main container, useful for testing. |
+| `onPassengersSelected` | `(passengers: passengerData[]) => void` | No       | `undefined`           | A callback function triggered whenever the passenger data is updated.   |
+
+---
+
+## TypeScript Types
+
+### `passengerData`
+
+The passengerData type represents the structure of a passenger entry:
+
+```typescript
+interface passengerData {
+  id: number; // Unique identifier for the passenger entry
+  number: number; // Number of passengers of this type
+  type: string; // Type of passenger (e.g., 'ADT', 'CHD', 'CMP')
+}
+```
+
+## Features
+
+1. **Dynamic Passenger Management**:
+
+   - Allows users to dynamically add, update, and remove passenger types and counts.
+   - Supports up to 9 total passengers and a maximum of 3 passenger types (`ADT`, `CHD`, `CMP`).
+
+2. **Passenger Type Selection**:
+
+   - Users can select passenger types (`ADT` for Adult, `CHD` for Child, `CMP` for Companion).
+   - Enforces rules such as requiring at least one `ADT` or `CMP` when a `CHD` is present.
+
+3. **Callback Support**:
+
+   - Triggers the `onPassengersSelected` callback whenever the passenger data is updated, passing the updated array of `passengerData` objects.
+
+4. **Add and Remove Passenger Types**:
+
+   - Includes a button to add new passenger types, styled using `StyledButtonPlus` and displaying a `PlusIcon`.
+   - Allows users to remove passenger types, with validation to ensure valid configurations.
+
+5. **Validation Rules**:
+
+   - Ensures that the total number of passengers does not exceed 9.
+   - Prevents adding duplicate passenger types.
+   - Displays an alert if a `CHD` is selected without an accompanying `ADT` or `CMP`.
+
+6. **Keyboard and Mouse Interaction**:
+   - Supports keyboard interactions for incrementing and decrementing passenger counts using arrow keys.
+   - Users can interact with the component using both keyboard and mouse.
+
+## Component Behavior
+
+1. **Passenger Initialization**:
+
+   - The component initializes with a single passenger type (`ADT`) and a count of 1.
+   - The `selectors` state tracks the count of passengers for each type.
+   - The `types` state tracks the passenger types (`ADT`, `CHD`, `CMP`).
+
+2. **Adding Passenger Types**:
+
+   - The "Add Passenger" button allows users to add new passenger types.
+   - New passenger types are added in the order of `ADT`, `CMP`, and `CHD`.
+   - The button is disabled if the total number of passengers reaches 9 or if all 3 types are already selected.
+
+3. **Updating Passenger Counts**:
+
+   - Users can increment or decrement the count of passengers for each type using the input field or arrow keys.
+   - The total number of passengers cannot exceed 9.
+
+4. **Removing Passenger Types**:
+
+   - Users can remove a passenger type using the delete button.
+   - Validation ensures that at least one `ADT` or `CMP` is present if a `CHD` is selected.
+   - If removing a passenger type violates the rules, an alert is displayed using the `showAlert` function.
+
+5. **Callback Execution**:
+
+   - The `onPassengersSelected` callback is triggered whenever the `selectors` or `types` state is updated, passing the updated passenger data to the parent component.
+
+6. **Validation and Alerts**:
+
+   - The `showAlert` function displays a styled alert message if the user attempts an invalid configuration (e.g., removing all adults when a child is present).
+
+7. **Keyboard and Mouse Interaction**:
+   - Users can interact with the component using both keyboard and mouse.
+   - The input fields support arrow key interactions for incrementing and decrementing counts.
