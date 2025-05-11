@@ -12,7 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "fluight-core": "^0.1.25",
+    "fluight-core": "^0.1.26",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
