@@ -6,8 +6,8 @@ export default create({
   fontBase: '"Open Sans", sans-serif',
   fontCode: "monospace",
 
-  brandTitle: "My custom Storybook",
-  brandUrl: "https://example.com",
+  brandTitle: "FLUIGHT",
+  brandUrl: "https://docs.fluight.com",
   brandImage: "./logo.png",
   brandTarget: "_self",
 

@@ -1,0 +1,121 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as SegmentData from './SegmentData.stories';
+ 
+<Meta of={SegmentData} />
+ 
+The `SegmentData` component is a React component designed for managing and displaying flight segment data. It integrates several subcomponents, such as `LocationPicker`, `DatePicker`, and `TimePicker`, to allow users to select origin and destination locations, as well as the date and time of the flight.
+
+---
+
+## Props
+
+### `SegmentDataProps`
+
+| Prop Name                       | Type                             | Required | Default Value    | Description                                                                          |
+| ------------------------------- | -------------------------------- | -------- | ---------------- | ------------------------------------------------------------------------------------ |
+| `originDefault`                 | `location \| null`               | No       | `null`           | The default origin location to display in the origin `LocationPicker`.               |
+| `destinationDefault`            | `location \| null`               | No       | `undefined`      | The default destination location to display in the destination `LocationPicker`.     |
+| `dateTimeDefault`               | `Date \| null \| undefined`      | No       | `undefined`      | The default date and time to display in the `DatePicker` and `TimePicker`.           |
+| `dataTestId`                    | `string`                         | No       | `'segment-data'` | The `data-testid` attribute for the main container, useful for testing.              |
+| `onGetOriginData`               | `(filter: string) => location[]` | No       | `undefined`      | A callback function to fetch filtered origin location data based on user input.      |
+| `onGetDestinationData`          | `(filter: string) => location[]` | No       | `undefined`      | A callback function to fetch filtered destination location data based on user input. |
+| `onOriginLocationSelected`      | `(location: location) => void`   | No       | `undefined`      | A callback function triggered when an origin location is selected.                   |
+| `onDestinationLocationSelected` | `(location: location) => void`   | No       | `undefined`      | A callback function triggered when a destination location is selected.               |
+| `onDateSelected`                | `(date: Date) => void`           | No       | `undefined`      | A callback function triggered when a date is selected in the `DatePicker`.           |
+| `onTimeSelected`                | `(date: Date) => void`           | No       | `undefined`      | A callback function triggered when a time is selected in the `TimePicker`.           |
+
+---
+
+## TypeScript Types
+
+### `location`
+
+The `location` type represents a location object with the following structure:
+
+```typescript
+type location = {
+  code: string; // The airport code (e.g., "JFK").
+  city: string; // The city name (e.g., "New York").
+  country: string; // The country name (e.g., "USA").
+  airportName: string; // The name of the airport (e.g., "John F. Kennedy International").
+};
+```
+
+## Features
+
+1. **Origin and Destination Selection**:
+
+   - Integrates two `LocationPicker` components for selecting the origin and destination locations.
+   - Supports dynamic filtering of locations using the `onGetOriginData` and `onGetDestinationData` callbacks.
+   - Displays placeholders (`"Origin"` and `"Destination"`) when no default values are provided.
+
+2. **Date and Time Selection**:
+
+   - Includes `DatePicker` and `TimePicker` components for selecting the flight's date and time.
+   - Supports default values for both date and time using the `dateTimeDefault` prop.
+
+3. **Callback Support**:
+
+   - Triggers `onOriginLocationSelected` and `onDestinationLocationSelected` when the user selects an origin or destination location.
+   - Triggers `onDateSelected` and `onTimeSelected` when the user selects a date or time.
+
+4. **Customizable Testing IDs**:
+
+   - Includes `data-testid` attributes for the main container and subcomponents, making it easier to test the component.
+
+5. **Responsive Layout**:
+
+   - Uses styled-components for a responsive and visually appealing layout, with separate sections for origin/destination and date/time.
+
+6. **Dynamic Placeholder Values**:
+
+   - Allows customization of placeholder values for the origin and destination fields via the `placeholderValue` object.
+
+7. **Error Handling**:
+
+   - Gracefully handles missing or invalid default values for origin, destination, date, or time by displaying placeholders or empty fields.
+
+8. **Keyboard and Mouse Interaction**:
+
+   - Supports both keyboard and mouse interactions for selecting locations, dates, and times.
+
+9. **Seamless Integration**:
+   - Designed to integrate seamlessly with other components in the application, such as `LocationPicker`, `DatePicker`, and `TimePicker`.
+
+## Component Behavior
+
+1. **Origin and Destination Pickers**:
+
+   - The `SegmentData` component uses two `LocationPicker` components to allow users to select the origin and destination locations.
+   - Displays placeholders (`"Origin"` and `"Destination"`) when no default values are provided.
+   - Supports dynamic filtering of locations using the `onGetOriginData` and `onGetDestinationData` callbacks.
+   - When a location is selected, the corresponding callback (`onOriginLocationSelected` or `onDestinationLocationSelected`) is triggered.
+
+2. **Date and Time Pickers**:
+
+   - The `DatePicker` component is used to select the flight's date, and the `TimePicker` component is used to select the flight's time.
+   - Both components display default values provided via the `dateTimeDefault` prop.
+   - When a date or time is selected, the corresponding callback (`onDateSelected` or `onTimeSelected`) is triggered.
+
+3. **Dynamic Placeholder Values**:
+
+   - The placeholders for the origin and destination fields are customizable through the `placeholderValue` object.
+
+4. **Error Handling**:
+
+   - If no default values are provided for origin, destination, date, or time, the component gracefully handles these cases by displaying placeholders or empty fields.
+
+5. **Keyboard and Mouse Interaction**:
+
+   - Users can interact with the component using both keyboard and mouse.
+   - The `LocationPicker`, `DatePicker`, and `TimePicker` components support native browser functionality for input and selection.
+
+6. **Callback Execution**:
+
+   - The component triggers the following callbacks when user actions occur:
+     - `onOriginLocationSelected`: Triggered when an origin location is selected.
+     - `onDestinationLocationSelected`: Triggered when a destination location is selected.
+     - `onDateSelected`: Triggered when a date is selected.
+     - `onTimeSelected`: Triggered when a time is selected.
+

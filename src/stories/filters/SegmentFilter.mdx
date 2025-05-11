@@ -1,0 +1,130 @@
+import { Canvas, Meta } from "@storybook/blocks";
+
+import * as SegmentFilter from "./SegmentFilter.stories";
+
+<Meta of={SegmentFilter} />
+
+# SegmentFilter
+
+The `SegmentFilter` component is designed to manage and display flight segment data. It integrates the `SegmentData` component to allow users to select origin and destination locations, as well as the date and time of the flight. Additionally, it provides functionality to delete a segment and dynamically update segment labels.
+
+---
+
+## Props
+
+### `SegmentFilterProps`
+
+| Prop Name               | Type                              | Required | Default Value      | Description                                                                                                |
+| ----------------------- | --------------------------------- | -------- | ------------------ | ---------------------------------------------------------------------------------------------------------- |
+| `index`                 | `number`                          | Yes      | N/A                | The index of the segment in the list of segments.                                                          |
+| `segment`               | `segmentEntry`                    | Yes      | N/A                | The flight segment data, including origin, destination, date, and time.                                    |
+| `isDeleteButtonEnabled` | `boolean`                         | No       | `true`             | Determines whether the delete button is enabled or disabled.                                               |
+| `dataTestId`            | `string`                          | No       | `'segment-filter'` | The `data-testid` attribute for the main container, useful for testing.                                    |
+| `onSegmentSelected`     | `(segment: segmentEntry) => void` | No       | `undefined`        | A callback function triggered when the segment data is updated (e.g., origin, destination, date, or time). |
+| `onDeleteSegment`       | `(id: number) => void`            | No       | `undefined`        | A callback function triggered when the delete button is clicked, passing the segment ID.                   |
+
+## TypeScript Types
+
+### `location`
+
+The `location` type represents a location object with the following structure:
+
+```typescript
+type location = {
+  code: string; // The airport code (e.g., "JFK").
+  city: string; // The city name (e.g., "New York").
+  country: string; // The country name (e.g., "USA").
+  airportName: string; // The name of the airport (e.g., "John F. Kennedy International").
+};
+```
+
+### `segmentEntry`
+
+The `segmentEntry` type represents a flight segment object with the following structure:
+
+```typescript
+interface segmentEntry {
+  id: number; // Unique identifier for the segment
+  origin: location | null; // Origin location of the flight
+  destination: location | null; // Destination location of the flight
+  date: Date | null; // Date of the flight
+  time: Date | null; // Time of the flight
+}
+```
+
+## Features
+
+1. **Dynamic Segment Labels**:
+
+   - Displays the origin and destination city names in the format `Origin City - Destination City`.
+   - Updates dynamically when the user selects a new origin or destination.
+   - Defaults to `"From"` and `"To"` if no origin or destination is provided.
+
+2. **Integration with `SegmentData`**:
+
+   - Uses the `SegmentData` component to manage origin, destination, date, and time selection.
+   - Supports callbacks for each selection (`onOriginLocationSelected`, `onDestinationLocationSelected`, `onDateSelected`, `onTimeSelected`).
+
+3. **Delete Button**:
+
+   - Includes a delete button to remove the segment.
+   - The button can be enabled or disabled using the `isDeleteButtonEnabled` prop.
+   - Triggers the `onDeleteSegment` callback when clicked, passing the segment ID.
+   - Displays a gray-colored delete icon (`#808080`) when the button is disabled.
+
+4. **Callback Support**:
+
+   - Triggers `onSegmentSelected` whenever the user updates the segment data (origin, destination, date, or time).
+   - Allows the parent component to track changes to the segment.
+
+5. **Customizable Testing IDs**:
+
+   - Includes `data-testid` attributes for the main container, delete button, and segment labels, making it easier to test the component.
+
+6. **Error Handling**:
+
+   - Gracefully handles missing or invalid segment data by displaying placeholders or empty fields for origin, destination, date, or time.
+
+7. **Keyboard and Mouse Interaction**:
+
+   - Supports both keyboard and mouse interactions for selecting locations, dates, and times.
+   - The delete button is clickable and accessible for removing segments.
+
+8. **Seamless Integration**:
+   - Designed to integrate seamlessly with the `SegmentData` component and other related components in the application.
+
+## Component Behavior
+
+1. **Dynamic Segment Labels**:
+
+   - The `SegmentFilter` component initializes the `segmentLabels` state with the origin and destination codes and cities from the `segment` prop.
+   - If no origin or destination is provided, the labels default to `"From"` and `"To"`.
+   - The labels update dynamically when the user selects a new origin or destination through the `SegmentData` component.
+
+2. **Integration with `SegmentData`**:
+
+   - The `SegmentData` component is used to manage the selection of origin, destination, date, and time.
+   - When a selection is made, the corresponding callback (`onSegmentSelected`) is triggered, and the `segmentLabels` state is updated.
+   - The `SegmentData` component also supports dynamic filtering of locations using the `onGetOriginData` and `onGetDestinationData` callbacks.
+
+3. **Delete Button**:
+
+   - The delete button is displayed if `isDeleteButtonEnabled` is `true`.
+   - When clicked, the `onDeleteSegment` callback is triggered, passing the segment ID.
+   - If the button is disabled, it is displayed in a gray color (`#808080`) and does not trigger any action.
+
+4. **Callback Execution**:
+
+   - The component triggers the following callbacks when user actions occur:
+     - `onSegmentSelected`: Triggered whenever the user updates the segment data (origin, destination, date, or time).
+     - `onDeleteSegment`: Triggered when the delete button is clicked, passing the segment ID.
+
+5. **Error Handling**:
+
+   - If no default values are provided for the segment, the component gracefully handles these cases by displaying placeholders or empty fields for origin, destination, date, or time.
+
+6. **Keyboard and Mouse Interaction**:
+
+   - Users can interact with the component using both keyboard and mouse.
+   - The `SegmentData` component supports native browser functionality for input and selection.
+

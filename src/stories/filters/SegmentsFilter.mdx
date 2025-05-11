@@ -1,0 +1,130 @@
+import { Canvas, Meta } from "@storybook/blocks";
+
+import * as SegmentsFilter from "./SegmentsFilter.stories";
+
+<Meta of={SegmentsFilter} />
+
+# SegmentsFilter
+
+The `SegmentsFilter` component is designed to manage and display a list of flight segments. It allows users to dynamically add, update, and delete flight segments using the `SegmentFilter` component.
+
+---
+
+## Props
+
+### `SegmentsFilterProps`
+
+| Prop Name            | Type                                 | Required | Default Value       | Description                                                             |
+| -------------------- | ------------------------------------ | -------- | ------------------- | ----------------------------------------------------------------------- |
+| `dataTestId`         | `string`                             | No       | `'segments-filter'` | The `data-testid` attribute for the main container, useful for testing. |
+| `onSegmentsSelected` | `(segments: segmentEntry[]) => void` | No       | `undefined`         | A callback function triggered whenever the list of segments is updated. |
+
+## TypeScript Types
+
+### `location`
+
+The `location` type represents a location object with the following structure:
+
+```typescript
+type location = {
+  code: string; // The airport code (e.g., "JFK").
+  city: string; // The city name (e.g., "New York").
+  country: string; // The country name (e.g., "USA").
+  airportName: string; // The name of the airport (e.g., "John F. Kennedy International").
+};
+```
+
+### `segmentEntry`
+
+The `segmentEntry` type represents a flight segment object with the following structure:
+
+```typescript
+interface segmentEntry {
+  id: number; // Unique identifier for the segment
+  origin: location | null; // Origin location of the flight
+  destination: location | null; // Destination location of the flight
+  date: Date | null; // Date of the flight
+  time: Date | null; // Time of the flight
+}
+```
+
+## Features
+
+1. **Dynamic Segment Management**:
+
+   - Allows users to dynamically add, update, and delete flight segments.
+   - Each segment is represented by a `SegmentFilter` component.
+
+2. **Default Segment Initialization**:
+
+   - Initializes the first segment with default values using the `defaultSegment` object.
+   - New segments inherit the destination of the previous segment as their origin.
+
+3. **Callback Support**:
+
+   - Triggers the `onSegmentsSelected` callback whenever the list of segments is updated, passing the updated array of `segmentEntry` objects.
+
+4. **Add Segment Button**:
+
+   - Includes a button to add new segments.
+   - The button is styled using `StyledAddFlightIcon` and displays a `PlusIcon`.
+
+5. **Delete Segment Functionality**:
+
+   - Allows users to delete segments using the delete button in the `SegmentFilter` component.
+   - The delete button is disabled for the first segment to ensure at least one segment remains.
+
+6. **Segment Updates**:
+
+   - The `updateSegment` function allows individual segments to be updated dynamically when changes are made in the `SegmentFilter` component.
+
+7. **Keyboard and Mouse Interaction**:
+
+   - Users can interact with the component using both keyboard and mouse.
+   - The "Add Segment" button and delete buttons are clickable and accessible.
+
+8. **Seamless Integration**:
+   - Designed to integrate seamlessly with the `SegmentFilter` component and other related components in the application.
+
+## Component Behavior
+
+1. **Segment Initialization**:
+
+   - The component initializes with a single segment using the `defaultSegment` object.
+   - The `segments` state is an array of `segmentEntry` objects, representing the list of flight segments.
+   - Each segment includes default values for origin, destination, date, and time.
+
+2. **Adding Segments**:
+
+   - The "Add Segment" button allows users to add new segments.
+   - When clicked, a new segment is added to the `segments` state.
+   - The new segment inherits the destination of the last segment as its origin.
+   - The `nextSegmentId` state is incremented to ensure unique IDs for each segment.
+
+3. **Updating Segments**:
+
+   - The `updateSegment` function updates a specific segment in the `segments` state when changes are made in the `SegmentFilter` component.
+   - The updated segment is passed to the `onSegmentSelected` callback, allowing the parent component to track changes.
+
+4. **Deleting Segments**:
+
+   - The `handleDeleteSegment` function removes a segment from the `segments` state when the delete button is clicked.
+   - The delete button is disabled for the first segment to ensure at least one segment remains in the list.
+
+5. **Callback Execution**:
+
+   - The `onSegmentsSelected` callback is triggered whenever the `segments` state is updated, passing the updated list of segments to the parent component.
+
+6. **Dynamic Segment Rendering**:
+
+   - The component maps over the `segments` state to render a `SegmentFilter` component for each segment.
+   - Each `SegmentFilter` is passed props such as `index`, `isDeleteButtonEnabled`, and `onSegmentSelected`.
+
+7. **Keyboard and Mouse Interaction**:
+
+   - Users can interact with the component using both keyboard and mouse.
+   - The "Add Segment" button and delete buttons are clickable and accessible.
+
+8. **Error Handling**:
+   - If no segments are present, the component ensures that at least one default segment is initialized.
+   - The component gracefully handles missing or invalid segment data by displaying placeholders or empty fields for origin, destination, date, or time.
