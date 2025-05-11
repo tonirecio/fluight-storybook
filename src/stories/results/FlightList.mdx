@@ -1,0 +1,192 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as FlightList from './FlightList.stories';
+ 
+<Meta of={FlightList} />
+ 
+# FlightList
+
+The `FlightCardFlightInformation` component is designed to display detailed information about a flight. It includes airline details, departure and arrival times, layover information, flight duration, and CO₂ emissions data.
+
+---
+
+## Props
+
+### `FlightInfoParams`
+
+| Prop Name    | Type             | Required | Description                                                              |
+| ------------ | ---------------- | -------- | ------------------------------------------------------------------------ |
+| `fares`      | `fare[]`         | Yes      | An array of fare objects containing pricing and emissions data.          |
+| `airline`    | `carrier`        | Yes      | The airline operating the flight.                                        |
+| `operatedBy` | `carrier`        | Yes      | The airline actually operating the flight (if different from `airline`). |
+| `flights`    | `flightDetail[]` | Yes      | An array of flight details, including departure and arrival information. |
+| `index`      | `number`         | Yes      | The index of the flight card in the list of flights.                     |
+
+## TypeScript Types
+
+### `fare`
+
+The fare type represents the cost and environmental impact of a flihgt fare
+
+```typescript
+export default interface fare {
+  name: string; // Name of the fare
+  price: number; // Price of the fare
+  basis: string; // Fare basis code
+  currentEmissions: number; // Current CO₂ emissions for the fare
+  typicalEmissions: number; //  Typical CO₂ emissions for the fare
+  properties: fareProperties; // Additional properties of the fare
+}
+```
+
+### `fareProperties`
+
+The `fareProperties` type represents additional properties of a fare with the following structure:
+
+```typescript
+export default interface fareProperties {
+  fareType: string; // Type of fare (e.g., "Economy", "Business")
+  contentSource: string; // Source of fare content (e.g., "GDS", "API")
+  carryOnBag: string; // Carry-on baggage allowance
+  checkedBag: string; // Checked baggage allowance
+  refundable: string; // Refundable status
+  changeable: string; // Changeable status
+  mileageAccrual: string; // Mileage accrual information
+  usbPower: string; // USB power availability
+  priorityCheckIn: string; // Priority check-in status
+  priorityBoarding: string; // Priority boarding status
+  priorityBaggage: string; // Priority baggage handling status
+  fastTrack: string; // Fast track security status
+  loungeAccess: string; // Lounge access status
+  upgrade: string | null; // Upgrade availability
+  transferService: string | null; // Transfer service availability
+  personalItem: string | null; // Personal item allowance
+  earlySeatSelection: string; // Early seat selection availability
+  extraLegroom: string; // Extra legroom availability
+  premiumSeat: string | null; // Premium seat availability
+  lieFlatSeat: string | null; // Lie-flat seat availability
+  mealBeverages: string | null; // Meal and beverage options
+  wifiAccess: string | null; // Wi-Fi access availability
+  inFlightEntertainment: string; // In-flight entertainment options
+}
+```
+
+### `carrier`
+
+The `carrier` type represents a airline information object with the following structure:
+
+```typescript
+export default interface carrier {
+  code: string;
+  name: string;
+}
+```
+
+### `flightDetail`
+
+The `flightDetail` type represents a flight segment object with the following structure:
+
+```typescript
+interface flightDetail {
+  code: string; // Flight number or code
+  origin: airport; // Origin airport details
+  destination: airport; // Destination airport details
+  departure: flightTime; // Departure details
+  arrival: flightTime; // Arrival details
+}
+```
+
+### `airport`
+
+The `airport` type represents an airport object with the following structure:
+
+```typescript
+interface airport {
+  code: string; // IATA code of the airport
+  name?: string; // Full name of the airport
+}
+```
+
+### `flightTime`
+
+The `flightTime` type represents the time and terminal information for a flight segment with the following structure:
+
+```typescript
+interface flightTime {
+  time: string; // Time in ISO 8601 format
+  terminal?: string; // Terminal at the airport
+}
+```
+
+## Features
+
+1. **Airline Information**:
+
+   - Displays the airline's logo and name.
+   - Shows an "Operated By" dialog if the flight is operated by a different airline.
+
+2. **Flight Times and Codes**:
+
+   - Displays departure and arrival times and airport codes.
+   - Includes layover information and indicators for multi-stop flights.
+
+3. **Flight Duration and Day Indicator**:
+
+   - Calculates and displays the total flight duration.
+   - Shows a "+1" or similar indicator if the flight arrives on the next day.
+
+4. **Flight Number**:
+
+   - Displays the flight number for the first segment.
+   - Shows additional flight numbers for multi-segment flights in a hoverable dialog.
+
+5. **CO₂ Emissions Indicator**:
+
+   - Displays a CO₂ emissions indicator comparing the flight's emissions to the typical route.
+   - Shows a dialog with detailed emissions information on hover.
+
+6. **Dynamic Dialogs**:
+
+   - Displays hoverable dialogs for layover airport codes, additional flight numbers, and CO₂ emissions.
+
+7. **Testing Support**:
+   - Includes `data-testid` attributes for easier testing with tools like `@testing-library/react`.
+
+---
+
+## Component Behavior
+
+1. **Airline Information**:
+
+   - Displays the airline's logo using the `StyledAirlineLogo` component.
+   - Shows the airline's name and an "Operated By" dialog if the flight is operated by a different airline.
+
+2. **Flight Times and Codes**:
+
+   - Displays the departure and arrival times and airport codes using `StyledTime` and `StyledAirportCode`.
+   - Includes layover information and a visual indicator for the number of stops.
+
+3. **Flight Duration and Day Indicator**:
+
+   - Calculates the total flight duration using the `getDuration` function.
+   - Displays a "+1" or similar indicator for next-day arrivals using the `getNumberOfDaysAhead` function.
+
+4. **Flight Number**:
+
+   - Displays the flight number for the first segment using `StyledFlightNumberCode`.
+   - Shows additional flight numbers for multi-segment flights in a hoverable dialog.
+
+5. **CO₂ Emissions Indicator**:
+
+   - Calculates the flight's CO₂ emissions compared to the typical route using the `calculateFligthEmissions` function.
+   - Displays a positive or negative percentage indicator with a hoverable dialog for detailed information.
+
+6. **Dynamic Dialogs**:
+
+   - Displays hoverable dialogs for:
+     - Layover airport codes using `getLayoverCodes`.
+     - Additional flight numbers using `getExtraFlightCodes`.
+     - CO₂ emissions details.
+
+7. **Keyboard and Mouse Interaction**:
+   - Users can hover over elements like the airline name, layover codes, and CO₂ indicators to view additional information in dialogs.

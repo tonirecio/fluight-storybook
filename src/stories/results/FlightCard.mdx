@@ -1,0 +1,175 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as FlightCard from './FlightCard.stories';
+ 
+<Meta of={FlightCard} />
+ 
+# FlightCard
+
+The `FlightCard` component is designed to display detailed information about a flight, including airline details, flight segments, and fare options. It integrates the `FlightCardFlightInformation` and `FlightCardFlightFares` components to provide a comprehensive view of the flight.
+
+---
+
+## Props
+
+### `FlightCardProps`
+
+| Prop Name        | Type                      | Required | Description                                                            |
+| ---------------- | ------------------------- | -------- | ---------------------------------------------------------------------- |
+| `flightData`     | `populatedRoute`          | Yes      | The flight data containing airline, flight segments, and fare details. |
+| `index`          | `number`                  | Yes      | The index of the flight card in the list of flights.                   |
+| `selected`       | `boolean`                 | Yes      | Indicates whether the flight card is currently selected.               |
+| `onCardSelected` | `(index: number) => void` | Yes      | A callback function triggered when the flight card is selected.        |
+
+---
+
+## TypeScript Types
+
+### `populatedRoute`
+
+The `populatedRoute` type represents the structure of a flight route object, with all sub types populated with data, with the following properties:
+
+```typescript
+export default interface populatedRoute {
+  routeId: string; // Unique identifier for the route
+  carrier: carrier; // Airline operating the flight
+  origin: string; // Origin airport code
+  destination: string; // Destination airport code
+  flights: populatedFlightDetail[]; // Array of flight details
+  fares: fare[]; // Array of fare options for the flight
+}
+```
+
+### `carrier`
+
+The `carrier` type represents a airline information object with the following structure:
+
+```typescript
+export default interface carrier {
+  code: string;
+  name: string;
+}
+```
+
+### `populatedFlightDetail`
+
+The `populatedFlightDetail` type represents a flight segment object, with all sub types populated with data, with the following properties:
+
+```typescript
+export default interface populatedFlightDetail {
+  origin: location; // Origin airport details
+  destination: location; // Destination airport details
+  code: string; // Flight number or code
+  aircraft: string; // Aircraft type
+  arrival: { time: string; terminal: string }; // Arrival details
+  departure: { time: string; terminal: string }; // Departure details
+  operatedBy: carrier; // Airline operating the flight
+}
+```
+
+### `location`
+
+The `location` type represents a location object with the following structure:
+
+```typescript
+type location = {
+  code: string; // The airport code (e.g., "JFK").
+  city: string; // The city name (e.g., "New York").
+  country: string; // The country name (e.g., "USA").
+  airportName: string; // The name of the airport (e.g., "John F. Kennedy International").
+  description: string; // Description of the location
+  type: string; // Type of location (e.g., "Airport", "City")
+  icon: string; // Icon representing the location
+};
+```
+
+### `fare`
+
+The fare type represents the cost and environmental impact of a flihgt fare
+
+```typescript
+export default interface fare {
+  name: string; // Name of the fare
+  price: number; // Price of the fare
+  basis: string; // Fare basis code
+  currentEmissions: number; // Current CO₂ emissions for the fare
+  typicalEmissions: number; //  Typical CO₂ emissions for the fare
+  properties: fareProperties; // Additional properties of the fare
+}
+```
+
+### `fareProperties`
+
+The `fareProperties` type represents additional properties of a fare with the following structure:
+
+```typescript
+export default interface fareProperties {
+  fareType: string; // Type of fare (e.g., "Economy", "Business")
+  contentSource: string; // Source of fare content (e.g., "GDS", "API")
+  carryOnBag: string; // Carry-on baggage allowance
+  checkedBag: string; // Checked baggage allowance
+  refundable: string; // Refundable status
+  changeable: string; // Changeable status
+  mileageAccrual: string; // Mileage accrual information
+  usbPower: string; // USB power availability
+  priorityCheckIn: string; // Priority check-in status
+  priorityBoarding: string; // Priority boarding status
+  priorityBaggage: string; // Priority baggage handling status
+  fastTrack: string; // Fast track security status
+  loungeAccess: string; // Lounge access status
+  upgrade: string | null; // Upgrade availability
+  transferService: string | null; // Transfer service availability
+  personalItem: string | null; // Personal item allowance
+  earlySeatSelection: string; // Early seat selection availability
+  extraLegroom: string; // Extra legroom availability
+  premiumSeat: string | null; // Premium seat availability
+  lieFlatSeat: string | null; // Lie-flat seat availability
+  mealBeverages: string | null; // Meal and beverage options
+  wifiAccess: string | null; // Wi-Fi access availability
+  inFlightEntertainment: string; // In-flight entertainment options
+}
+```
+
+## Features
+
+1. **Comprehensive Flight Details**:
+
+   - Includes detailed information about the flight's origin and destination locations using the `location` interface.
+   - Provides the flight code and aircraft type for identification.
+
+2. **Operational Information**:
+
+   - Contains details about the airline operating the flight through the `operatedBy` property, which uses the `carrier` interface.
+
+3. **Time and Terminal Information**:
+
+   - Includes structured data for both departure and arrival times and terminals.
+
+4. **Reusable Structure**:
+
+   - Designed to be used across multiple components, such as flight cards, itineraries, and flight comparison tools.
+
+5. **Standardized Data Representation**:
+   - Ensures consistent representation of flight segment data throughout the application.
+
+## Component Behavior
+
+1. **Data Representation**:
+
+   - The `populatedFlightDetail` interface ensures that all flight segment-related data is consistently structured and includes all necessary fields.
+
+2. **Integration**:
+
+   - Used in components like `FlightCardFlightInformation` to display detailed flight segment information.
+   - Supports dynamic rendering of flight details in itineraries, flight cards, and comparison tools.
+
+3. **Time and Terminal Information**:
+
+   - The `arrival` and `departure` properties provide structured data for displaying flight times and terminal information in a user-friendly format.
+
+4. **Operational Details**:
+
+   - The `operatedBy` property allows components to display the airline operating the flight, even if it differs from the marketing carrier.
+
+5. **Reusability**:
+   - The interface is designed to be reusable across various components, ensuring consistent data handling and display.
