@@ -1,0 +1,70 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as FlightLayoverBanner from './FlightLayoverBanner.stories';
+ 
+<Meta of={FlightLayoverBanner} />
+ 
+# FlightLayoverBanner
+
+The `FlightLayoverBanner` component is designed to display layover information for a flight. It calculates the layover duration based on arrival and departure times and provides a formatted message that includes the layover city and duration.
+
+---
+
+## Props
+
+### `FlightLayoverBannerProps`
+
+| Prop Name       | Type                  | Required | Default Value | Description                                                 |
+| --------------- | --------------------- | -------- | ------------- | ----------------------------------------------------------- |
+| `arrivalTime`   | `Date \| undefined`   | Yes      | N/A           | The arrival time of the flight segment before the layover.  |
+| `departureTime` | `Date \| undefined`   | Yes      | N/A           | The departure time of the flight segment after the layover. |
+| `layoverCity`   | `string \| undefined` | Yes      | N/A           | The city where the layover occurs.                          |
+| `testId`        | `string`              | No       | `''`          | The `data-testid` attribute for testing purposes.           |
+
+## Features
+
+1. **Layover Duration Calculation**:
+
+   - Calculates the layover duration in hours and minutes based on the provided `arrivalTime` and `departureTime`.
+   - Handles overnight layovers by adjusting the `departureTime` when it is earlier than the `arrivalTime`.
+
+2. **Formatted Layover Information**:
+
+   - Displays a formatted message that includes the layover duration and city.
+   - Handles cases where layover information is incomplete or unavailable.
+
+3. **Validation of Dates**:
+
+   - Ensures that the provided `arrivalTime` and `departureTime` are valid `Date` objects before performing calculations.
+
+4. **Icon Integration**:
+
+   - Displays a clock icon (`ClockIcon`) alongside the layover information for visual context.
+
+5. **Testing Support**:
+   - Includes `data-testid` attributes for easier testing with tools like `@testing-library/react`.
+
+## Component Behavior
+
+1. **Layover Duration Calculation**:
+
+   - The `calculateLayoverTime` function calculates the layover duration:
+     - If `arrivalTime` is earlier than `departureTime`, the duration is calculated directly.
+     - If `arrivalTime` is later than `departureTime`, the `departureTime` is adjusted by adding 24 hours to account for overnight layovers.
+     - Returns `0` if either `arrivalTime` or `departureTime` is invalid.
+
+2. **Validation of Dates**:
+
+   - The `isValidDate` function checks whether the provided `arrivalTime` and `departureTime` are valid `Date` objects.
+
+3. **Formatted Layover Information**:
+
+   - The `displayLayoverTime` function formats the layover duration as a string (e.g., "2h 30m").
+   - The `displayLayoverInformation` function combines the layover duration and city into a complete message:
+     - Example: "2h 30m layover in New York."
+     - Handles cases where either the layover duration or city is unavailable.
+
+4. **Rendering**:
+
+   - The component renders the layover information inside a styled container (`FlightLayoverBannerStyled`).
+   - Includes a clock icon (`ClockIcon`) for visual context.
